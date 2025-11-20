@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tacsos - Original French Tacos</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #ffffff;
+            --accent-color: #d4af37;
+            --text-color: #333333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #1a1a1a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--secondary-color);
+            z-index: 1;
+        }
+
+        .hero-logo {
+            height: 150px;
+            width: auto;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 80px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 28px;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            transform-origin: center center;
+        }
+
+        .gallery h2:hover {
+            color: var(--accent-color);
+        }
+
+
+
+        
+
+
+
+
+
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .video-card {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-card video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+
+
+
+
+
+
+
+
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--secondary-color);
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        .about > .container > p {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 60px;
+            color: var(--text-color);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: var(--light-bg);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature p {
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3,
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+
+        .contact-form button {
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .hero-content h1 {
+                font-size: 48px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .hero-logo {
+                height: 100px;
+            }
+
+            .gallery h2,
+            .about h2,
+            .contact h2 {
+                font-size: 36px;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+            .gallery h2,
+            .about h2,
+            .contact h2 {
+                font-size: 28px;
+            }
+
+            .gallery,
+            .about,
+            .contact {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="logo.jpg" alt="Tacsos Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#Specialties">Specialties</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="logo.jpg" alt="Tacsos Logo" class="hero-logo">
+            <h1>Tacsos</h1>
+            <p>Original French Tacos</p>
+        </div>
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="SaveGram.App_AQOzwgYs2eb3VsqhffWAl2gEarxeVmqKOm7kZw-fP1ydbCW2XatB1rJZ7wttTSdAxt5U31KGo_Rb7ufz1QvYVW2D14Dp6hs_ubCtQOQ.mp4" type="video/mp4">
+        </video>
+        
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Our Specialties</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="SaveGram.App_AQOzwgYs2eb3VsqhffWAl2gEarxeVmqKOm7kZw-fP1ydbCW2XatB1rJZ7wttTSdAxt5U31KGo_Rb7ufz1QvYVW2D14Dp6hs_ubCtQOQ.mp4.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="SaveGram.App_AQM5iw340b4NT6cq2l_Ilj47S8CHe_cxJZJuTMHs3UfNgSFuewvnpIuqkxsk0OTVFx8ZlVOCFbLIb09MwzGJTCJX_IeyY4EvXww0dp0.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="SaveGram.App_AQNWoERNnwwbjz3GdgxHzrKxtw8hDmwU-_aH63geK0jYKvg7vRCZXBkKaAvkiThLlU2U_cCS9xxajCW0hSzSIN_HM3xSMXw0_vFcRTM.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Specialties Section-->
+     
+
+
+<section id="Specialties" class="Specialties">
+            <h2>Tacos</h2>
+<style>
+
+.image-row {
+    display: flex;
+    gap: 10px;
+}
+.image-row img {
+    width: 33%;
+    height: auto; /* Keep original proportions */
+    transition: transform 0.3s;
+}
+.image-row img:hover {
+    transform: scale(1.2);
+}
+</style>
+
+<div class="image-row">
+    <img src="teswira1.jpg">
+    <img src="teswira2.jpg"> 
+    <img src="teswira3.jpg">
+</div>
+                    
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Tacsos</h2>
+            <p> bnin barcha
+            </p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Quality Ingredients</h3>
+                    <p>5edma n4ifa</p>
+                </div>
+                <div class="feature">
+                    <h3>Expert Preparation</h3>
+                    <p>good chefs</p>
+                </div>
+                <div class="feature">
+                    <h3>Unique Flavors</h3>
+                    <p>barcha anwé3 ta3 liquidet</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Email:</strong> info@tacsos.com</p>
+                    <p><strong>Address:</strong> el 9ayed</p>
+                    <p><strong>Hours:</strong> Mon-Sun 11:00 AM - 10:00 PM</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.facebook.com/tacsos.sfax" class="social-link" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://www.instagram.com/tacsos_food/" class="social-link" target="_blank" rel="noopener noreferrer" >Instagram</a>
+                <a href="https://www.google.com/maps/place/Tacsos/@34.7695352,10.7383119,17z/data=!4m14!1m7!3m6!1s0x1301d3a00a295965:0xaacb0fe18ee9e07c!2sTacsos!8m2!3d34.7695308!4d10.7408868!16s%2Fg%2F11skwz1gzg!3m5!1s0x1301d3a00a295965:0xaacb0fe18ee9e07c!8m2!3d34.7695308!4d10.7408868!16s%2Fg%2F11skwz1gzg?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D" class="social-link" target="_blank" rel="noopener noreferrer">Location</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth mouse-follow effect for "Our Specialties" heading
+        const galleryHeading = document.querySelector('.gallery h2');
+        let targetX = 0;
+        let targetY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        // Make heading clickable to scroll to gallery section
+        galleryHeading.addEventListener('click', () => {
+            const gallerySection = document.querySelector('#gallery');
+            gallerySection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const headingRect = galleryHeading.getBoundingClientRect();
+            const headingCenterX = headingRect.left + headingRect.width / 2;
+            const headingCenterY = headingRect.top + headingRect.height / 2;
+
+            const distanceX = e.clientX - headingCenterX;
+            const distanceY = e.clientY - headingCenterY;
+            const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+
+            // Only calculate target if mouse is within 500px
+            if (distance < 10000) {
+                const angle = Math.atan2(distanceY, distanceX);
+                const moveDistance = (2*distance - distance)/25 ;
+                targetX = Math.cos(angle) * moveDistance;
+                targetY = Math.sin(angle) * moveDistance;
+            } else {
+                targetX = 0;
+                targetY = 0;
+            }
+        });
+
+        // Smooth animation loop
+        function animate() {
+            currentX += (targetX - currentX) * 0.15; // Easing factor
+            currentY += (targetY - currentY) * 0.15;
+
+            galleryHeading.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
